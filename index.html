@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe AI | Pastel Design</title>
+    <meta name="description" content="Play Tic-Tac-Toe against an unbeatable AI. Modern pastel design with smooth animations.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animated Shapes -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        
+        <!-- 1. Welcome Page -->
+        <section id="view-welcome" class="view active">
+            <div class="glass-card">
+                <h1>Welcome to <br>Tic-Tac-Toe AI</h1>
+                <p class="subtitle">Challenge the unbeatable AI or play with your friend!</p>
+                <div class="illustration">
+                    <div class="mock-board">
+                        <span>❌</span><span></span><span>⭕</span>
+                        <span></span><span>❌</span><span></span>
+                        <span>⭕</span><span></span><span>❌</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary glow" onclick="navigate('view-instructions')">Next ➔</button>
+            </div>
+        </section>
+
+        <!-- 2. Game Instructions Page -->
+        <section id="view-instructions" class="view">
+            <div class="glass-card">
+                <h2>How to Play</h2>
+                <ul class="instructions-list">
+                    <li>🎯 Players take turns placing <strong>X</strong> and <strong>O</strong>.</li>
+                    <li>🏆 First to align symbols horizontally, vertically, or diagonally wins.</li>
+                    <li>🤝 If all cells are filled with no winner, it is a draw.</li>
+                </ul>
+                <div class="ai-info">
+                    <h3>🧠 About the AI</h3>
+                    <p>The computer uses the Minimax algorithm to calculate every possible move, ensuring it plays perfectly. In 3x3 mode, it is <strong>unbeatable</strong>!</p>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="navigate('view-welcome')">⬅ Back</button>
+                    <button class="btn btn-primary" onclick="navigate('view-mode')">Next ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Select Play Mode Page -->
+        <section id="view-mode" class="view">
+            <div class="glass-card">
+                <h2>Select Play Mode</h2>
+                <div class="options-container">
+                    <div class="option-card" onclick="selectMode('pvc')">
+                        <div class="icon">🤖</div>
+                        <h3>Player vs Computer</h3>
+                        <p>Play against the Minimax AI</p>
+                    </div>
+                    <div class="option-card" onclick="selectMode('pvp')">
+                        <div class="icon">🧑‍🤝‍🧑</div>
+                        <h3>Player vs Player</h3>
+                        <p>Play locally with a friend</p>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="navigate('view-instructions')">⬅ Back</button>
+                    <button class="btn btn-primary" onclick="navigateNextFromMode()">Next ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Select Board Size Page -->
+        <section id="view-board-size" class="view">
+            <div class="glass-card">
+                <h2>Select Board Size</h2>
+                <div class="options-container">
+                    <div class="option-card" onclick="selectSize(3)">
+                        <div class="icon">🟩</div>
+                        <h3>3 × 3</h3>
+                        <p>Classic Mode. AI is unbeatable.</p>
+                    </div>
+                    <div class="option-card" onclick="selectSize(4)">
+                        <div class="icon">🟪</div>
+                        <h3>4 × 4</h3>
+                        <p>Extended Mode. AI is optimized.</p>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="navigate('view-mode')">⬅ Back</button>
+                    <button class="btn btn-primary" onclick="navigateNextFromSize()">Next ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Ready to Play Page -->
+        <section id="view-ready" class="view">
+            <div class="glass-card">
+                <h2>Ready to Play!</h2>
+                <div class="summary-box">
+                    <p><strong>Mode:</strong> <span id="summary-mode">...</span></p>
+                    <p><strong>Board Size:</strong> <span id="summary-size">...</span></p>
+                </div>
+                <p class="motivational">Everything is set! Are you ready to outsmart the AI?</p>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="navigate('view-board-size')">⬅ Back</button>
+                    <button class="btn btn-primary pulse" onclick="startGame()">Start Game 🚀</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Game Page -->
+        <section id="view-game" class="view">
+            <div class="glass-card game-card">
+                <div class="game-header">
+                    <h2 id="turn-indicator">Player X's Turn</h2>
+                </div>
+                <div id="game-board" class="board">
+                    <!-- Cells generated via JS -->
+                </div>
+                <div class="button-group vertical">
+                    <button class="btn btn-primary" onclick="restartGame()">↻ Restart Game</button>
+                    <button class="btn btn-secondary" onclick="navigate('view-welcome')">🏠 Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Winner / Congratulations Page -->
+        <section id="view-result" class="view">
+            <div class="glass-card result-card">
+                <div class="confetti-container" id="confetti"></div>
+                <h1 id="result-emoji" class="result-emoji">🎉</h1>
+                <h2 id="result-message">Congratulations! You Won!</h2>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="navigate('view-welcome')">🏠 Return to Home</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
