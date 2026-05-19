@@ -30,5 +30,4 @@ The project was structured simply and efficiently as requested:
 - `style.css`: Contains the responsive layouts, animations, and the complete design system.
 - `script.js`: Handles all the state management (e.g., active view, active player, board array), the Minimax AI logic, and DOM manipulation (like the custom confetti function).
 
-## How to Test
-Simply double-click on `index.html` (located in your `c:\Users\Anitha\OneDrive\Desktop\my website` directory) to open it in any modern browser. You can navigate through the menus and test the AI directly.
+
